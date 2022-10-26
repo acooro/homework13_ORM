@@ -3,7 +3,7 @@ const { Category, Product } = require('../../models');
 
 //get/post/put/delete
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const data = await Category.findAll({
       include: [{ model: Product }],
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const data = await Category.findByPk(req.params.id, {
       include: [{ model: Product }],
@@ -30,17 +30,17 @@ router.get('/:id', async (req, res) => {
   
 });
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const data = await Category.create(req.body);
     res.status(200).json(data);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   
   }  
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   Category.undate(req.body, {
     where: {
       id: req.params.id,
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
   .catch((err) => res.json(err));
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const data = await Category.destroy({
       where: {
@@ -65,7 +65,7 @@ router.delete('/:id', async (req, res) => {
     }
     res.status(200).json(data);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
   
 });
